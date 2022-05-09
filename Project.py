@@ -20,7 +20,6 @@ import matplotlib.pyplot as plt
 requirements_txt = open("requirements.txt", "r")
 requirements_txt.read()
 
-
 st.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/pngwing.com.png') # Used a logo instead of a title
 st.sidebar.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/Uber_logo.svg.png')
 
