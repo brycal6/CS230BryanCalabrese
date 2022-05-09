@@ -17,6 +17,8 @@ import pydeck as pdk
 import pandas as pd
 import matplotlib.pyplot as plt
 
+with open('requirements.txt') as f:
+    lines = f.readlines()
 st.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/pngwing.com.png') # Used a logo instead of a title
 st.sidebar.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/Uber_logo.svg.png')
 
