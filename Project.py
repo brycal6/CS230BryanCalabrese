@@ -16,7 +16,6 @@ import streamlit as st
 import pydeck as pdk
 import pandas as pd
 import matplotlib.pyplot as plt
-import plotly.figure_factory as ff
 
 st.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/pngwing.com.png') # Used a logo instead of a title
 st.sidebar.image('/Users/bryancalabrese/OneDrive - Bentley University/Spring 2022/CS 230/Project/Uber_logo.svg.png')
@@ -47,13 +46,13 @@ sidebarheader(part="I")
 st.title("Part I")
 st.header("Uber Fares Per Passenger")
 
-fare_amt = st.sidebar.slider("Please select a trip total fare amount:",1,196)
-
+fare_amt = st.sidebar.slider("Please select a trip total fare amount:",5,196)
+s1 = sdf[sdf.fare_amount <= fare_amt][['fare_amount', 'passenger_count']]
 
 #st.dataframe(s1)
-dfaverage = sdf.groupby("passenger_count").mean()
+dfaverage = s1.groupby("passenger_count").mean()
 
-chart = st.sidebar.selectbox("Select a chart", ["","Bar Chart", "Scatter Plot"])
+chart = st.sidebar.selectbox("Select a chart", ["","Bar Chart", "Line Plot"])
 
 passengers = [0,1,2,3,4,5,6]
 fig, ax = plt.subplots()
@@ -66,10 +65,10 @@ if chart == "Bar Chart":
     ax1.set_ylabel("Fare Amount")
     ax1.set_title("Fare per Passenger")
     st.pyplot(fig1)
-elif chart == "Scatter Plot":
+elif chart == "Line Plot":
     fig1 = plt.figure(figsize=(12,8))
     ax1 = fig1.add_axes([.5,.5,.5,.5])
-    ax1.scatter(passengers, dfaverage["fare_amount"], color = 'orange')
+    ax1.plot(passengers, dfaverage["fare_amount"], color = 'orange')
     ax1.set_xlabel("Passengers")
     ax1.set_ylabel("Fare Amount")
     ax1.set_title("Fare per Passenger")
@@ -80,6 +79,7 @@ else:
 # Part 2
 sidebarheader(part="II")
 st.title("Part II")
+st.header("Uber Fares versus Trip Duration")
 
 fare_amt2 = st.sidebar.number_input("Please select how much you are willing to spend:",2.5,200.0)
 s5 = sdf[sdf.fare_amount <= fare_amt2][['fare_amount']]
